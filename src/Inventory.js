@@ -1,41 +1,112 @@
 import 'phaser';
-import Game from './index';
+//import Game from './index';
 
 export class InvScene extends Phaser.Scene {
 
-    constructor(scene) {
+    constructor() {
         super('Inv');
-        this.GameScene = scene;
-
-        //this.myScene = this.GameScene.get('Inv');
-        //console.log(this.myScene)
 
         this.inventoryOpen = false;
     }
 
     preload() {
-        this.load.image('invSlot2', 'assets/sprites/icons/inventorySlot.png');
+        this.load.image('invSlot', 'assets/sprites/icons/inventorySlot.png');
+        this.load.image('invBack', 'assets/sprites/icons/inventoryBack.png');
     }
 
     create() {
-        this.test = this.add.sprite(0, 0, 'invSlot2');
+        const invWidthScale = 0.3;
+
+        this.invBack = this.add.sprite(this.scale.width - (this.scale.width * invWidthScale), 0, 'invBack');
+        this.invBack.displayWidth = this.scale.width * invWidthScale;
+        this.invBack.setOrigin(0);
+        this.invBack.displayHeight = this.game.config.height;
+        this.invBack.alpha = 0.35;
+        this.invBack.tint = 0x000000;
+        this.invBack2 = this.add.sprite(this.scale.width - (this.scale.width * invWidthScale)+1, 0, 'invBack');
+        this.invBack2.displayWidth = this.scale.width * invWidthScale;
+        this.invBack2.setOrigin(0);
+        this.invBack2.displayHeight = this.game.config.height;
+        this.invBack2.alpha = 0.35;
+        //this.invBack2.tint = 0x000000;
+
+
+        this.nameBack = this.add.sprite(this.scale.width - (this.scale.width * (invWidthScale / 2)), 40, 'invSlot');
+        this.nameBack.displayWidth = this.scale.width * (invWidthScale / 1.2);
+        this.nameBack.displayHeight = this.scale.width * 0.04;
+        this.nameBack.alpha = 0.4;
+        
+        this.nameBack2 = this.add.sprite(this.scale.width - (this.scale.width * (invWidthScale / 2))-2, 38, 'invSlot').setInteractive();
+        this.nameBack2.displayWidth = this.scale.width * (invWidthScale / 1.2);
+        this.nameBack2.displayHeight = this.scale.width * 0.04;
+        this.nameBack2.alpha = 0.4;
+        this.nameBack.tint = 0x000000;
+
+	    let invNameStyle = { font: "24px prstartk", fill: "white", align: "center" };        
+        this.nameText = this.add.text(this.scale.width - (this.scale.width * (invWidthScale / 2)), 40, 'JAMES', invNameStyle)
+        this.nameText.setOrigin(0.5);
+
+        this.statsBack = this.add.sprite(this.scale.width - (this.scale.width * (invWidthScale / 2)), 300, 'invSlot');
+        this.statsBack.displayWidth = this.scale.width * (invWidthScale / 1.2);
+        this.statsBack.displayHeight = this.scale.width * 0.15;
+        this.statsBack.alpha = 0.4;
+        
+        this.statsBack2 = this.add.sprite(this.scale.width - (this.scale.width * (invWidthScale / 2))-2, 298, 'invSlot').setInteractive();
+        this.statsBack2.displayWidth = this.scale.width * (invWidthScale / 1.2);
+        this.statsBack2.displayHeight = this.scale.width * 0.15;
+        this.statsBack2.alpha = 0.4;
+        this.statsBack.tint = 0x000000;
+
+
+        this.input.setDefaultCursor('url(assets/sprites/icons/cursor.png), pointer');
+
+        this.nameBack2.on('pointerover', () => {
+            this.nameBack.alpha = 0.65;
+        });
+        this.nameBack2.on('pointerout', () => {
+            this.nameBack.alpha = 0.4;
+        });
+        this.statsBack2.on('pointerover', () => {
+            this.statsBack.alpha = 0.65;
+        });
+        this.statsBack2.on('pointerout', () => {
+            this.statsBack.alpha = 0.4;
+        });
+
+        this.input.keyboard.on('keydown', (event) => {
+            if(event.code == 'KeyI') {
+                this.toggleInventory();
+            }
+        });
+
+        this.startInventory();
     }
 
     update() {
 
     }
 
+    startInventory() {
+        this.scene.get('Inv');
+        this.scene.setVisible(false, 'Inv');
+        this.statsBack2.removeInteractive();
+        this.nameBack2.removeInteractive();
+    }
+
     toggleInventory() {
-        console.log(Game.scene)
-        //console.log(this)
-        //console.log(this.GameScene)
+
         if(this.inventoryOpen) {
             this.inventoryOpen = false;
-            //this.GameScene.scene.stop('Inv');
-            //this.scene.sleep();
+            this.statsBack2.removeInteractive();
+            this.nameBack2.removeInteractive();
+            this.scene.get('Inv');
+            this.scene.setVisible(false, 'Inv');
         } else {
             this.inventoryOpen = true;
-            //this.GameScene.scene.start('Inv');
+            this.scene.get('Inv');
+            this.scene.setVisible(true, 'Inv');
+            this.statsBack2.setInteractive();
+            this.nameBack2.setInteractive();
         }
     }
 

@@ -1,13 +1,12 @@
 import 'phaser';
 import Player from '../Player';
-import { InvScene } from '../Inventory';
  
 export default class GameScene extends Phaser.Scene {
     constructor() {
         super('Game');
 
         this.p = new Player();
-        this.inv = new InvScene(this);
+        //this.inv = new InvScene(this);
 
         this.zoomLevel = 0;
     }
@@ -18,7 +17,6 @@ export default class GameScene extends Phaser.Scene {
 
         this.load.tilemapTiledJSON('map', 'assets/maps/newmap.json');
         this.load.image('tiles1', 'assets/sprites/tilesets/mountain-ex.png');
-        this.load.image('invSlot', 'assets/sprites/icons/inventorySlot.png');
     }
 
     create() {
@@ -37,6 +35,11 @@ export default class GameScene extends Phaser.Scene {
             this.p.movingX = this.input.activePointer.worldX;
             this.p.movingY = this.input.activePointer.worldY;
             this.physics.moveTo(this.p.sprite, this.p.movingX, this.p.movingY, 100);
+            if(this.p.movingX > this.p.sprite.body.x) {
+                this.p.sprite.flipX = false;
+            } else {
+                this.p.sprite.flipX = true;
+            }
         });
 
         // init map
@@ -96,14 +99,6 @@ export default class GameScene extends Phaser.Scene {
 
             this.cameras.main.setZoom(zoomLevel + 1.5);
         });
-
-        this.input.keyboard.on('keydown', (event) => {
-            if(event.code == 'KeyI') {
-                this.inv.toggleInventory();
-            }
-        });
-
-        //this.inv.startInventory();
 
     }
 
