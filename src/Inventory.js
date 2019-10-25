@@ -2,7 +2,9 @@ import 'phaser';
 import GameScene from './scenes/GameScene';
 
 export default class Inventory {
-    constructor(){
+    constructor(scene){
+
+        this.scene = scene;
 
         /*let bmd = this.add.bitmapData(50, 50);
             bmd.ctx.beginPath();
@@ -79,7 +81,7 @@ export default class Inventory {
     }
 
     startInventory() {
-        this.scene.get('Game');
+        //this.scene.get('Game');
 
         this.test = this.physics.add.sprite(0, 0, 'invSlot');
     }

@@ -7,7 +7,7 @@ export default class GameScene extends Phaser.Scene {
         super('Game');
 
         this.p = new Player();
-        this.inv = new Inventory();
+        this.inv = new Inventory(this.scene);
 
         this.zoomLevel = 0;
     }
