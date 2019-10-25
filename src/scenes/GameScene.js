@@ -1,13 +1,13 @@
 import 'phaser';
 import Player from '../Player';
-import Inventory from '../Inventory';
+import { InvScene } from '../Inventory';
  
 export default class GameScene extends Phaser.Scene {
     constructor() {
         super('Game');
 
         this.p = new Player();
-        this.inv = new Inventory(this.scene);
+        this.inv = new InvScene(this);
 
         this.zoomLevel = 0;
     }
@@ -103,7 +103,7 @@ export default class GameScene extends Phaser.Scene {
             }
         });
 
-        this.inv.startInventory();
+        //this.inv.startInventory();
 
     }
 

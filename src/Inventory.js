@@ -1,10 +1,53 @@
 import 'phaser';
-import GameScene from './scenes/GameScene';
+import Game from './index';
+
+export class InvScene extends Phaser.Scene {
+
+    constructor(scene) {
+        super('Inv');
+        this.GameScene = scene;
+
+        //this.myScene = this.GameScene.get('Inv');
+        //console.log(this.myScene)
+
+        this.inventoryOpen = false;
+    }
+
+    preload() {
+        this.load.image('invSlot2', 'assets/sprites/icons/inventorySlot.png');
+    }
+
+    create() {
+        this.test = this.add.sprite(0, 0, 'invSlot2');
+    }
+
+    update() {
+
+    }
+
+    toggleInventory() {
+        console.log(Game.scene)
+        //console.log(this)
+        //console.log(this.GameScene)
+        if(this.inventoryOpen) {
+            this.inventoryOpen = false;
+            //this.GameScene.scene.stop('Inv');
+            //this.scene.sleep();
+        } else {
+            this.inventoryOpen = true;
+            //this.GameScene.scene.start('Inv');
+        }
+    }
+
+}
 
 export default class Inventory {
     constructor(scene){
 
-        this.scene = scene;
+
+        this.GameScene = scene;
+
+
 
         /*let bmd = this.add.bitmapData(50, 50);
             bmd.ctx.beginPath();
@@ -80,18 +123,19 @@ export default class Inventory {
 
     }
 
-    startInventory() {
-        //this.scene.get('Game');
-
-        this.test = this.physics.add.sprite(0, 0, 'invSlot');
-    }
-
-
     toggleInventory() {
         if(this.inventoryOpen) {
             this.inventoryOpen = false;
+            InvScene.scene.stop('Inv');
         } else {
             this.inventoryOpen = true;
+            InvScene.scene.start('Inv');
         }
     }
+
+    startInventory() {
+        //this.test = this.GameScene.add.sprite(0, 0, 'invSlot');
+        //this.test.setScrollFactor(0);
+    }
+
 }
