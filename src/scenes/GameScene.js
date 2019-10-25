@@ -9,10 +9,10 @@ export default class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.spritesheet('knight', 'assets/knight.png', {frameWidth: 108, frameHeight: 108});
+        this.load.spritesheet('knight', 'assets/sprites/player_sprites/knight.png', {frameWidth: 108, frameHeight: 108});
         this.load.tilemapTiledJSON('map', 'assets/maps/newmap.json');
-        this.load.image('tiles1', 'assets/tilemaps/mountain-ex.png');
-    } 
+        this.load.image('tiles1', 'assets/sprites/tilesets/mountain-ex.png');
+    }
 
     create() {
 
