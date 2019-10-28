@@ -4,6 +4,10 @@ export default {
     width: window.innerWidth,
     height: window.innerHeight,
     pixelArt: true,
+    scale: {
+        parent: 'phaser-example',
+        mode: Phaser.Scale.RESIZE
+    },
     physics: {
         default: 'arcade'
     },

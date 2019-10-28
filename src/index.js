@@ -10,8 +10,8 @@ class Game extends Phaser.Game {
     this.scene.start('Game');
 
     this.scene.add('Inv', InvScene);
-    this.scene.start('Inv');
-    this.scene.setVisible(false, 'Inv')
+    this.scene.start('Inv'); 
+    //this.scene.setVisible(false, 'Inv');
   }
 }
 

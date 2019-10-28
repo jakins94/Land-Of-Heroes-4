@@ -7,6 +7,7 @@ export class InvScene extends Phaser.Scene {
         super('Inv');
 
         this.inventoryOpen = false;
+
     }
 
     preload() {
@@ -15,62 +16,79 @@ export class InvScene extends Phaser.Scene {
     }
 
     create() {
-        const invWidthScale = 0.3;
+        this.invWidthScale = 0.3;
 
-        this.invBack = this.add.sprite(this.scale.width - (this.scale.width * invWidthScale), 0, 'invBack');
-        this.invBack.displayWidth = this.scale.width * invWidthScale;
+        this.invWidth = this.scale.width * this.invWidthScale; // inventory width is 30% of game screen
+        this.invStartX = this.scale.width - this.invWidth; // where inventory starts
+
+        this.invBack = this.add.sprite(this.invStartX, 0, 'invBack');
+        this.invBack.displayWidth = this.scale.width * this.invWidthScale;
         this.invBack.setOrigin(0);
         this.invBack.displayHeight = this.game.config.height;
         this.invBack.alpha = 0.35;
         this.invBack.tint = 0x000000;
-        this.invBack2 = this.add.sprite(this.scale.width - (this.scale.width * invWidthScale)+1, 0, 'invBack');
-        this.invBack2.displayWidth = this.scale.width * invWidthScale;
+        this.invBack2 = this.add.sprite(this.invStartX + 1, 1, 'invBack');
+        this.invBack2.displayWidth = this.scale.width * this.invWidthScale;
         this.invBack2.setOrigin(0);
         this.invBack2.displayHeight = this.game.config.height;
         this.invBack2.alpha = 0.35;
         //this.invBack2.tint = 0x000000;
 
+        this.nameBoxStartX = this.invStartX + 20;
+        this.nameBoxStartY = this.cameras.main.height * 0.025;
+        this.nameBoxWidth = this.invWidth - 40;
+        this.nameBoxHeight = this.cameras.main.height * 0.05;
 
-        this.nameBack = this.add.sprite(this.scale.width - (this.scale.width * (invWidthScale / 2)), 40, 'invSlot');
-        this.nameBack.displayWidth = this.scale.width * (invWidthScale / 1.2);
-        this.nameBack.displayHeight = this.scale.width * 0.04;
-        this.nameBack.alpha = 0.4;
+        this.nameBox = this.add.sprite(this.nameBoxStartX, this.nameBoxStartY, 'invSlot');
+        this.nameBox.displayWidth = this.nameBoxWidth;
+        this.nameBox.displayHeight = this.nameBoxHeight;
+        this.nameBox.setOrigin(0);
+        this.nameBox.alpha = 0.4;
         
-        this.nameBack2 = this.add.sprite(this.scale.width - (this.scale.width * (invWidthScale / 2))-2, 38, 'invSlot').setInteractive();
-        this.nameBack2.displayWidth = this.scale.width * (invWidthScale / 1.2);
-        this.nameBack2.displayHeight = this.scale.width * 0.04;
-        this.nameBack2.alpha = 0.4;
-        this.nameBack.tint = 0x000000;
+        this.nameBox2 = this.add.sprite(this.nameBoxStartX+2, this.nameBoxStartY+2, 'invSlot');
+        this.nameBox2.displayWidth = this.nameBoxWidth;
+        this.nameBox2.displayHeight = this.nameBoxHeight;
+        this.nameBox2.alpha = 0.4;
+        this.nameBox2.setOrigin(0);
+        this.nameBox.tint = 0x000000;
 
-	    let invNameStyle = { font: "24px prstartk", fill: "white", align: "center" };        
-        this.nameText = this.add.text(this.scale.width - (this.scale.width * (invWidthScale / 2)), 40, 'JAMES', invNameStyle)
+	    this.invNameStyle = { font: "24px prstartk", fill: "white"};
+        this.nameText = this.add.text(this.scale.width - (this.scale.width * (this.invWidthScale / 2)), 40, 'JAMES', this.invNameStyle)
         this.nameText.setOrigin(0.5);
 
-        this.statsBack = this.add.sprite(this.scale.width - (this.scale.width * (invWidthScale / 2)), 300, 'invSlot');
-        this.statsBack.displayWidth = this.scale.width * (invWidthScale / 1.2);
-        this.statsBack.displayHeight = this.scale.width * 0.15;
-        this.statsBack.alpha = 0.4;
+
+        this.statBoxStartX = this.invStartX + 20;
+        this.statBoxStartY = this.cameras.main.height * 0.5;
+        this.statBoxWidth = this.invWidth - 40;
+        this.statBoxHeight = this.cameras.main.height * 0.25;
+
+        this.statBox = this.add.sprite(this.statBoxStartX, this.statBoxStartY, 'invSlot');
+        this.statBox.displayWidth = this.statBoxWidth;
+        this.statBox.displayHeight = this.statBoxHeight;
+        this.statBox.setOrigin(0);
+        this.statBox.alpha = 0.4;
         
-        this.statsBack2 = this.add.sprite(this.scale.width - (this.scale.width * (invWidthScale / 2))-2, 298, 'invSlot').setInteractive();
-        this.statsBack2.displayWidth = this.scale.width * (invWidthScale / 1.2);
-        this.statsBack2.displayHeight = this.scale.width * 0.15;
-        this.statsBack2.alpha = 0.4;
-        this.statsBack.tint = 0x000000;
+        this.statBox2 = this.add.sprite(this.statBoxStartX, this.statBoxStartY, 'invSlot');
+        this.statBox2.displayWidth = this.statBoxWidth - 2;
+        this.statBox2.displayHeight = this.statBoxHeight - 2;
+        this.statBox2.setOrigin(0);
+        this.statBox2.alpha = 0.4;
+        this.statBox.tint = 0x000000;
 
 
         this.input.setDefaultCursor('url(assets/sprites/icons/cursor.png), pointer');
 
-        this.nameBack2.on('pointerover', () => {
-            this.nameBack.alpha = 0.65;
+        this.nameBox2.on('pointerover', () => {
+            this.nameBox.alpha = 0.65;
         });
-        this.nameBack2.on('pointerout', () => {
-            this.nameBack.alpha = 0.4;
+        this.nameBox2.on('pointerout', () => {
+            this.nameBox.alpha = 0.4;
         });
-        this.statsBack2.on('pointerover', () => {
-            this.statsBack.alpha = 0.65;
+        this.statBox2.on('pointerover', () => {
+            this.statBox.alpha = 0.65;
         });
-        this.statsBack2.on('pointerout', () => {
-            this.statsBack.alpha = 0.4;
+        this.statBox2.on('pointerout', () => {
+            this.statBox.alpha = 0.4;
         });
 
         this.input.keyboard.on('keydown', (event) => {
@@ -84,29 +102,78 @@ export class InvScene extends Phaser.Scene {
 
     update() {
 
+        // update size of the inventory if size of the game screen has changed
+        if((this.cameras.main.width * this.invWidthScale) != this.invWidth ||
+            this.cameras.main.height != this.invBack.displayHeight) {
+                this.invWidth = this.cameras.main.width * this.invWidthScale; // inventory width is 30% of game screen
+                this.invStartX = this.cameras.main.width - this.invWidth; // where inventory starts
+
+                this.invBack.x = this.invStartX;
+                this.invBack.displayWidth = this.cameras.main.width * this.invWidthScale;
+                this.invBack.displayHeight = this.cameras.main.height;
+                this.invBack2.x = this.invStartX + 1;
+                this.invBack2.displayWidth = this.cameras.main.width * this.invWidthScale;
+                this.invBack2.displayHeight = this.cameras.main.height;
+
+                this.nameBoxStartX = this.invStartX + 20;
+                this.nameBoxStartY = this.cameras.main.height * 0.025;
+                this.nameBoxWidth = this.invWidth - 40;
+                this.nameBoxHeight = this.cameras.main.height * 0.05;
+        
+                this.nameBox.displayWidth = this.nameBoxWidth;
+                this.nameBox.displayHeight = this.nameBoxHeight;
+                this.nameBox.x = this.nameBoxStartX;
+                this.nameBox.y = this.nameBoxStartY;
+                this.nameBox2.displayWidth = this.nameBoxWidth;
+                this.nameBox2.displayHeight = this.nameBoxHeight;
+                this.nameBox2.x = this.nameBoxStartX + 2;
+                this.nameBox2.y = this.nameBoxStartY + 2;
+
+                this.statBoxStartX = this.invStartX + 20;
+                this.statBoxStartY = this.cameras.main.height * 0.35;
+                this.statBoxWidth = this.invWidth - 40;
+                this.statBoxHeight = this.cameras.main.height * 0.25;
+
+                this.statBox.displayWidth = this.statBoxWidth;
+                this.statBox.displayHeight = this.statBoxHeight;
+                this.statBox.x = this.statBoxStartX;
+                this.statBox.y = this.statBoxStartY;
+                
+                this.statBox2.displayWidth = this.statBoxWidth - 2;
+                this.statBox2.displayHeight = this.statBoxHeight - 2;
+                this.statBox2.x = this.statBoxStartX;
+                this.statBox2.y = this.statBoxStartY;
+
+                this.nameText.x = this.nameBoxStartX + (this.nameBoxWidth / 2);
+                this.nameText.y = this.nameBoxStartY + (this.nameBoxHeight / 2);
+
+                this.nameText.setFontSize(Math.round((this.cameras.main.width / 70) + (this.cameras.main.height / 55)));
+
+                
+        }
     }
 
     startInventory() {
         this.scene.get('Inv');
         this.scene.setVisible(false, 'Inv');
-        this.statsBack2.removeInteractive();
-        this.nameBack2.removeInteractive();
+        this.statBox2.removeInteractive();
+        this.nameBox2.removeInteractive();
     }
 
     toggleInventory() {
 
         if(this.inventoryOpen) {
             this.inventoryOpen = false;
-            this.statsBack2.removeInteractive();
-            this.nameBack2.removeInteractive();
+            this.statBox2.removeInteractive();
+            this.nameBox2.removeInteractive();
             this.scene.get('Inv');
             this.scene.setVisible(false, 'Inv');
         } else {
             this.inventoryOpen = true;
             this.scene.get('Inv');
             this.scene.setVisible(true, 'Inv');
-            this.statsBack2.setInteractive();
-            this.nameBack2.setInteractive();
+            this.statBox2.setInteractive();
+            this.nameBox2.setInteractive();
         }
     }
 
