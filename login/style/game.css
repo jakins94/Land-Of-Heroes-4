@@ -1,0 +1,852 @@
+@font-face {
+	font-family: "Minecraftia";
+	src: url(../fonts/Minecraftia.ttf);
+	font-size: 10px;
+}
+
+@font-face {
+	font-family: "Ampad";
+	src: url(../fonts/AmpadBrush.ttf);
+	font-size: 10;
+}
+
+@font-face {
+	font-family: "Polo";
+	src: url(../fonts/Polo.ttf);
+	font-size: 10;
+}
+
+@font-face {
+	font-family: "Chopin";
+	src: url(../fonts/ChopinScript.ttf);
+	font-weight: 12;
+}
+
+@font-face {
+	font-family: "Baroque";
+	src: url(../fonts/BaroqueAntiqueScript.ttf);
+	font-size: 60%!important;
+}
+
+@font-face {
+	font-family: "Brock";
+	src: url(../fonts/BrockScript.ttf);
+	font-weight: 12;
+}
+
+@font-face {
+	font-family: "Exmouth";
+	src: url(../fonts/exmouth_.ttf);
+	font-weight: 12;
+}
+
+@font-face {
+	font-family: "Allura";
+	src: url(../fonts/Allura-Regular.ttf);
+	font-weight: 12;
+}
+
+@font-face {
+	font-family: "Pixels";
+	src: url(../fonts/Pixels.ttf);
+	font-weight: 12;
+}
+
+@font-face {
+	font-family: "PressStart";
+	src: url(../fonts/PressStart.ttf);
+	font-weight: 5;
+}
+
+@font-face {
+	font-family: "Silkscreen";
+	src: url(../fonts/Silkscreen.ttf);
+	font-weight: 12;
+	font-size: 10;
+}
+@font-face {
+	font-family: "E-Square";
+	src: url(../fonts/E-SQUARE_demo.otf);
+	font-weight: 12;
+}
+@font-face {
+	font-family: "Noose";
+	src: url(../fonts/DKUmbilicalNoose.ttf);
+	font-weight: 12;
+}
+
+.bonusStats {
+	font-family: "E-Square";
+	font-size: 10pt;
+	color: green;
+}
+
+body {
+	overflow: hidden;
+	/*background-color: #000;*/
+	/*background-image: url('../sprites/wallpaper.png');*/
+}
+
+canvas {
+	display: block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.text {
+	width:60%;
+	height:300px;
+	padding:5px;
+	background:#444;
+	color:#c96;
+}
+
+#chatlog {
+	align: bottom;
+	position: absolute;
+	bottom: 10px;
+	left: 15px;
+	font-family: "Minecraftia";
+	font-size: 10px;
+	overflow:auto;
+	border: 2px solid black;
+	border-radius:2px;
+	width: 250px;
+	height: 100px;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 4;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	/*background-image: url(../sprites/chatlog.png);*/
+}
+
+#message {
+	position: absolute;
+	right: 10px;
+	autocomplete: off;
+	top: 10px;
+	color: #c96;
+	font-family: "Minecraftia";
+	width: 210px;
+	height: 20px;
+	line-height: 25px;
+	font-size: 12px;
+	background-color: rgba(0, 0, 0, 0.8);
+	float: left;
+	border: 1px solid #EEEEEE;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+}
+
+.slide {
+	position: absolute;
+	bottom: 0;
+}
+.slide .inner {
+	position: absolute;
+	background-color: blue;
+	bottom: 0px;
+	width: 200px;
+}
+
+body, html{
+	margin:0;
+	padding:0;
+}
+
+#slidebottom {
+	position:absolute;
+	bottom:0;
+}
+
+#thebutton {
+	position: absolute;
+	bottom: 0;
+	left: 220px;
+}
+
+#playerLevelBg {
+	position: absolute;
+	margin-top: 5px;
+	margin-left: 15px;
+	height: 32px;
+	width: 32px;
+	z-index: 5;
+}
+
+#playerLevel {
+	position: absolute;
+	margin-top: 7px;
+	margin-left: 17px;
+	height: 32px;
+	width: 32px;
+	color: white;
+	text-align: center;
+	line-height: 30px;
+	font-family: "Minecraftia";
+	font-size: 14px;
+	z-index: 5;
+}
+
+#playerExperienceBorder {
+	position: absolute;
+	margin-top: 35px;
+	margin-left: 55px;
+	border-bottom: solid 1px white;
+	border-right: solid 1px white;
+	width: 150px;
+	height: 3px;
+	z-index: 5;
+}
+
+#playerExperience {
+	position: absolute;
+	margin-top: 34px;
+	margin-left: 55px;
+	background-color: #00EEEE;
+	width: 150px;
+	height: 3px;
+	text-align: center;
+	line-height: 30px;
+	font-family: "Minecraftia";
+	font-size: 12px;
+	z-index: 5;
+}
+
+#pName {
+	position: absolute;
+	margin-top: 5px;
+	margin-left: 55px;
+	color: white;
+	height: 32px;
+	width: 32px;
+	font-size: 14px;
+	font-family: "Minecraftia", sans-serif;
+	font-weight: bold;
+	line-height: 32px;
+}
+
+.heartImg {
+	position: absolute;
+	margin-left: -129px;
+	clip:rect(0px 160px 32px 128px); /* rect(oben | rechts | unten | links) */
+}
+
+#playerCoins {
+	position: absolute;
+	margin-top: 100px;
+	margin-left: 175px;
+	width: 32px;
+	height: 32px;
+	z-index: 3;
+}
+#bLogout {
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 10px;
+	height: 32px;
+	width: 32px;
+	background-image: url('../sprites/quit.png');
+	background-size: 80% auto;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	z-index:3;
+}
+#playerDamage {
+	position: absolute;
+	margin-top: 100px;
+	margin-left: 175px;
+	width: 32px;
+	height: 32px;
+	z-index: 3;
+}
+#damage {
+	position: absolute;
+	margin-top: 107px;
+	margin-left: 217px;
+	width: 150px;
+	height: 10px;
+	color: #FFB90F; /* gold */
+	z-index: 3;
+}
+#playerDefense {
+	position: absolute;
+	margin-top: 132px;
+	margin-left: 175px;
+	width: 32px;
+	height: 32px;
+	z-index: 3;
+}
+#defense {
+	position: absolute;
+	margin-top: 139px;
+	margin-left: 217px;
+	width: 150px;
+	height: 10px;
+	color: #FFB90F; /* gold */
+	z-index: 3;
+}
+
+#playerCold {
+	position: absolute;
+	margin-top: 164px;
+	margin-left: 175px;
+	width: 32px;
+	height: 32px;
+	z-index: 3;
+}
+#cold {
+	position: absolute;
+	margin-top: 171px;
+	margin-left: 217px;
+	width: 150px;
+	height: 10px;
+	color: #FFB90F; /* gold */
+	z-index: 3;
+}
+#playerFire {
+	position: absolute;
+	margin-top: 196px;
+	margin-left: 175px;
+	width: 32px;
+	height: 32px;
+	z-index: 3;
+}
+#fire {
+	position: absolute;
+	margin-top: 203px;
+	margin-left: 217px;
+	width: 150px;
+	height: 10px;
+	color: #FFB90F; /* gold */
+	z-index: 3;
+}
+
+
+
+#playerHeart {
+	position: absolute;
+	margin-top: 45px;
+	margin-left: 15px;
+	width: 32px;
+	height: 32px;
+}
+
+#health {
+	position: absolute;
+	margin-top: 52px;
+	margin-left: 57px;
+	background-color: #ed1c24;
+	height: 10px;
+	width: 146px;
+	z-index: 5;
+}
+
+#playerHealthBorder {
+	position: absolute;
+	margin-top: 50px;
+	margin-left: 55px;
+	background-image: url(../sprites/health_border.png);
+	height: 14px;
+	width: 150px;
+	z-index: 5;
+}
+
+#mana {
+	position: absolute;
+	margin-top: 24px;
+	margin-left: 52px;
+	background-color: blue;
+	height: 10px;
+	width: 150px;
+	z-index: 5;
+}
+
+#playerManaBorder {
+	position: absolute;
+	margin-top: 22px;
+	margin-left: 50px;
+	border: solid 2px;
+	border-color: white;
+	height: 10px;
+	width: 150px;
+	z-index: 5;
+}
+
+#enemyLevel {
+	position: absolute;
+	margin-top: 5px;
+	right: 15px;
+	color: white;
+	height: 30px;
+	width: 30px;
+	font-family: "Minecraftia";
+	font-size: 14px;
+	text-align: center;
+	line-height: 30px;
+}
+
+#enemyHeart {
+	position: absolute;
+	margin-top: 45px;
+	right: 15px;
+	width: 32px;
+	height: 32px;
+}
+
+#enemyName {
+	position: absolute;
+	margin-top: 5px;
+	right: 55px;
+	color: white;
+	height: 32px;
+	width: 32px;
+	font-size: 14px;
+	font-family: "Minecraftia", sans-serif;
+	font-weight: bold;
+	line-height: 32px;
+}
+
+#enemyHealth {
+	position: absolute;
+	margin-top: 52px;
+	right: 57px;
+	background-color: red;
+	height: 10px;
+	width: 146px;
+	z-index: 1;
+}
+
+#enemyHealthBorder {
+	position: absolute;
+	margin-top: 50px;
+	right: 55px;
+	height: 14px;
+	width: 150px;
+	z-index: 2;
+	background-image: url(../sprites/health_border.png);
+}
+.transbox {
+	padding: 5px;
+	text-align: center;
+    background-color: #000000;
+   // border: 2px solid #777777;
+    opacity: 0.8;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+
+.hideClass {
+	visibility: hidden;
+}
+
+#fps {
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 500px;
+	bottom: 0;
+	right: 0;
+	color: white;
+	text-align: right;
+	font-size: 12px;
+	line-height: 14px;
+	z-index: 4;
+}
+
+#kontrolle {
+	position: absolute;
+	right: 0px;
+	bottom: 20px;
+	text-align: right;
+	color: white;
+	font-size: 12px;
+	line-height: 14px;
+	z-index: 6;
+}
+
+#playerName {
+	autocomplete: off;
+}
+#playerPass {
+	autocomplete: off;
+}
+
+.gameArea {
+	width: 645px;
+	height: 645px;
+	overflow: hidden;
+	position: absolute;
+	font-family: "Minecraftia";
+	z-index: 3;
+}
+
+#gameContainer {
+	position: absolute;
+	z-index: 0;
+	-webkit-transform: translateZ(0);
+   -moz-transform: translateZ(0);
+   -ms-transform: translateZ(0);
+   -o-transform: translateZ(0);
+   transform: translateZ(0);
+}
+
+.bgDiv {
+	position: absolute;
+	/*left: 5px;
+	top: 5px;*/
+	z-index: 1;
+}
+
+#aCanvas {
+	position: absolute;
+	/*left: 5px;
+	top: 5px;*/
+	z-index: 2;
+	-webkit-transform: translateZ(0);
+   -moz-transform: translateZ(0);
+   -ms-transform: translateZ(0);
+   -o-transform: translateZ(0);
+   transform: translateZ(0);
+}
+
+#gameCanvas {
+	z-index: 1;
+	position: absolute;
+	top: 0px;
+	font-family: "Minecraftia";
+	font-size: 20px;
+	-webkit-transform: translateZ(0);
+   -moz-transform: translateZ(0);
+   -ms-transform: translateZ(0);
+   -o-transform: translateZ(0);
+   transform: translateZ(0);
+}
+
+#bgCanvas {
+	z-index: 1;
+	position: absolute;
+	-webkit-transform: translateZ(0);
+   -moz-transform: translateZ(0);
+   -ms-transform: translateZ(0);
+   -o-transform: translateZ(0);
+   transform: translateZ(0);
+}
+
+#mapCanvas {
+	position: absolute;
+	-moz-border-radius: 8px 8px 8px 8px;
+	-webkit-border-radius: 8px 8px 8px 8px;
+	border-radius: 8px;
+	z-index: 4;
+}
+
+#inventoryCanvas {
+	
+	display: inline;
+	position: absolute;
+	left: 50px;
+	top: 100px;
+	-moz-border-radius: 8px 8px 8px 8px;
+	-webkit-border-radius: 8px 8px 8px 8px;
+	border-radius:3px;
+	outline: 2px solid black;          
+	outline-offset: -10px;
+	z-index: 4;
+}
+
+#bagCanvas {
+	display: inline;
+	position: absolute;
+	left: 50px;
+	top: 350px;
+	-moz-border-radius: 8px 8px 8px 8px;
+	-webkit-border-radius: 8px 8px 8px 8px;
+	border-radius:3px;
+	outline: 2px solid black;          
+	outline-offset: -10px;
+	z-index: 5;
+}
+#bagBuffer {
+	position: absolute;
+	left: 50px;
+	top: 350px; 
+	z-index: 5;
+}
+
+#skillBCanvas {
+	display: inline;
+	position: absolute;
+	left: 50px;
+	top: 100px;
+	outline: 2px solid black;
+	z-index: 4;
+}
+#skillCanvas {
+	display: inline;
+	position: absolute;
+	left: 50px;
+	top: 100px;
+	outline: 2px solid black;
+	z-index: 4;
+}
+
+#inventoryBuffer {
+	position: absolute;
+	left: 50px;
+	top: 100px; 
+	z-index: 4;
+}
+
+#skillCanvas {
+	position: absolute;
+	left: 300px;
+	top: 110px;
+	z-index: 4;
+}
+
+#skillBuffer {
+	position: absolute;
+	left: 300px;
+	top: 110px; 
+	z-index: 4;
+}
+
+#conversation {
+	position: absolute;
+	text-align: center;
+	border-radius: 4px;
+	background-color: rgba(0,0,0,0.5);
+	width: 400px;
+	height: 100px;
+	top: 550px;
+	left: 100px;
+	z-index: 4;
+}
+
+#convText {
+	position: absolute;
+	border-radius: 4px;
+	padding-left: 10px;
+	padding-top: 10px;
+	width: 240px;
+	height: 80px;
+	top: 5px;
+	left: 5px;
+	font-size: 12px;
+	color: white;
+	background-color: rgba(0,0,0,0.5);
+}
+
+#convButton1 {
+	position: absolute;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 4px;
+	padding-left: 5px;
+	width: 130px;
+	height: 30px;
+	top: 5px;
+	left: 260px;
+	font-size: 12px;
+	color: white;
+	background-color: rgba(0,0,0,0.5);
+}
+
+#confirmation {
+	cursor: default;
+	padding: 10px;
+	font-weight: bold;
+	position: absolute;
+	color: #FFB90F;
+	text-align: center;
+	border-radius: 4px;
+	background-color: rgba(0,0,0,0.6);
+	//height:auto;
+	width: 225px;
+	height: 75px;
+	top: 200px;
+	left: 50%;
+	z-index: 4;
+}
+
+#yes {
+	margin-top: 10px;
+	float:left;
+	//position: absolute;
+	border-radius: 4px;
+	height: 30px;
+	width: 100px;
+	text-align: center;
+	line-height: 30px;
+	color: limegreen;
+	background-color: rgba(100,100,100,0.5);
+}
+#yes:hover {
+	background-color: rgba(0,200,0,0.5);
+}
+
+#no {
+	margin-top: 10px;
+	float:right;
+	//position: absolute;
+	border-radius: 4px;
+	height: 30px;
+	width: 100px;
+	color: red;
+	text-align: center;
+	line-height: 30px;
+	background-color: rgba(100,100,100,0.5);
+}
+#no:hover {
+	background-color: rgba(200,0,0,0.5);
+}
+#gameArea {
+	position: absolute;
+	width: 640px;
+	height: 640px;
+	overflow: hidden;
+	font-family: "Minecraftia";
+}
+
+#mapButton {
+	position: absolute;
+	background-image: url(../sprites/map.png);
+	height: 32px;
+	width: 32px;
+	top: 147px;
+	right: 10px;
+	z-index:4;
+}
+
+#questButton {
+	position: absolute;
+	background-image: url(../sprites/quest.png);
+	height: 32px;
+	width: 32px;
+	top: 184px;
+	right: 10px;
+	z-index:6;
+}
+
+#questMenu {
+	position: absolute;
+	z-index: 4;
+	padding: 5px;
+	color: #FFB90F;
+	border-radius: 4px;
+	/*background-color: rgba(0,0,0,0.8);*/
+	background-image: url(../sprites/quest_bg.png);
+	height: 400px;
+	width: 400px;
+}
+
+#statMenu {
+	position: absolute;
+	z-index: 4;
+	padding: 5px;
+	color: #FFB90F;
+	border-radius: 4px;
+	/*background-color: rgba(0,0,0,0.8);*/
+	background-image: url(../sprites/quest_bg.png);
+	height: 400px;
+	width: 400px; text-align: center;
+}
+
+.float_center {
+  float: right;
+
+  position: relative;
+  left: -50%; /* or right 50% */
+  text-align: left;
+}
+
+.float_center > .child {
+  position: relative;
+  left: 50%;
+}
+.dDur {
+	margin-left: 15px;
+	float: left;
+	height: 4px;
+	background-color: #ffffff;
+	color: #ffffff;
+}
+.dDur2 {
+	float:left;
+	height: 4px;
+	background-color: #666666;
+	color: #ffffff;
+}
+
+#details {
+	position: absolute;
+	width: auto;
+	display:block;
+	min-width: 150px;
+	font-family: "Minecraftia";
+	font-size: 10px;
+	color: white;
+	margin: 10px 0;
+	line-height:13px;
+	z-index: 5;
+	border: 2px solid #777777;
+}
+
+#details2 {
+	position: absolute;
+	width: auto;
+	display:block;
+	min-width: 150px;
+	font-family: "Minecraftia";
+	font-size: 10px;
+	color: white;
+	margin: 10px 0;
+	line-height:13px;
+	z-index: 5;
+	border: 2px solid #777777;
+}
+
+#details3 {
+	position: absolute;
+	width: auto;
+	display:block;
+	min-width: 150px;
+	font-family: "Minecraftia";
+	font-size: 10px;
+	color: white;
+	margin: 10px 0;
+	line-height:13px;
+	z-index: 5;
+	border: 2px solid #777777;
+}
+
+#details4 {
+	position: absolute;
+	width: auto;
+	display:block;
+	min-width: 150px;
+	font-family: "Minecraftia";
+	font-size: 8px;
+	color: white;
+	margin: 10px 0;
+	line-height:13px;
+	z-index: 5;
+	border: 2px solid #777777;
+}
+
+#input {
+	position: absolute;
+	top: 200px;
+	left: 200px;
+	height: 40px;
+	width: 350px;
+	color: #EEEEEE;
+	background-color: rgba(0,0,0,0.6);
+	border-radius: 3px;
+	z-index: 4;
+}

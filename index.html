@@ -16,6 +16,7 @@
             html, body {
                 height: 100%;
                 margin: 0;
+                overflow: hidden;
             }
             .main {
                 height: 100%;
@@ -31,8 +32,13 @@
                 font-family: prstart;
                 src: url(assets/fonts/prstart.ttf);
             }
+            #chat {
+                position: absolute;
+                opacity: 0.0;
+            }
         </style>
   </head>
   <body>
+      <input type="text" id="chat">
   </body>
 </html>
