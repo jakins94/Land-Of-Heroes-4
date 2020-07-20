@@ -375,6 +375,8 @@ export class EquipScene extends Phaser.Scene {
         this.eqText.y = Math.round(this.eqBoxStartY + (this.eqBoxHeight / 2)) - 5;
         this.eqText.setOrigin(0.5);
 
+        // TODO: Stat boxes adjusted based on size of the longest stat name (intelligence) so it is bugging when you resize your screen and don't re-open equipment screen
+
         for(let i=0;i<coreStats.length;i++) { 
             this.coreStatText[i].x = this.coreStatCoords[i][0] * this.equipWidth;
             this.coreStatText[i].y = this.coreStatCoords[i][1] * this.equipHeight;
