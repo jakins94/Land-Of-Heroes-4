@@ -24,7 +24,8 @@ export default class Enemy {
 		this.healthBar = null;
 		this.destroyTimer = -1;
 		this.moving = false;
-		this.scale = 1;
+		this.scaleX = 1;
+		this.scaleY = 1;
 
         this.sprite = null;
         this.healthBarBack = null;
@@ -43,6 +44,7 @@ export default class Enemy {
 		this.sprite.destroy();
 		this.healthBarBack.destroy();
 		this.healthBarFront.destroy();
+		this.nameText.destroy();
 	}
 	distance(x1, y1, x2, y2) {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));

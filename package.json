@@ -5,8 +5,11 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "build": "webpack --config webpack/prod.js ",
-    "start": "webpack-dev-server --config webpack/base.js --open --host 0.0.0.0"
+    "build": "webpack --config webpack/prod.js",
+    "start": "webpack-dev-server --config webpack/base.js --mode development",
+    "start4": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "start2": "webpack-dev-server --config webpack/base.js --host 144.217.12.79",
+    "start3": "webpack-dev-server --config webpack/base.js --open"
   },
   "repository": {
     "type": "git",
@@ -28,14 +31,14 @@
     "html-webpack-plugin": "^3.2.0",
     "raw-loader": "^1.0.0",
     "terser-webpack-plugin": "^1.2.1",
-    "webpack": "^4.28.3",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1",
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
     "express": "^4.17.1",
-    "phaser": "^3.16.2",
+    "phaser": "^3.21.0",
     "socket.io": "^2.3.0"
   }
 }

@@ -1,5 +1,8 @@
 export default {
-    ip: 'http://192.168.1.67:8001',
+    
+    ip: 'http://localhost:8001',
+    loginPage: 'http://localhost:3000/login',
+    debugMobile: false,
     type: Phaser.AUTO,
     parent: 'phaser-example',
     width: window.innerWidth,
@@ -10,9 +13,16 @@ export default {
         mode: Phaser.Scale.RESIZE
     },
     physics: {
-        default: 'arcade'
+        default: 'arcade',
+        arcade: {
+            debug: false
+        }
     },
     render: {
         antialias: true
     },
+    dom: {
+        createContainer: true
+      }
+
   };

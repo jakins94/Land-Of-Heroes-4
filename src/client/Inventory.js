@@ -2,6 +2,7 @@ import 'phaser';
 import { isChatting } from './ChatHandler';
 import { dropItem, equipItem } from './Socket';
 import { getItemList, adjustedStat } from './ItemHandler';
+import { sceneLoaded } from '../index';
 
 let items = [];
 
@@ -31,7 +32,8 @@ export class InvScene extends Phaser.Scene {
         this.load.image('invSlot', 'assets/sprites/icons/inventorySlot.png');
         this.load.image('deleteIcon', 'assets/sprites/icons/deleteIcon.png');
         this.load.image('invBack', 'assets/sprites/icons/inventoryBack.png');
-        this.load.image('bronzeSword', 'assets/sprites/items/bronzeSword.png');
+
+        /*this.load.image('bronzeSword', 'assets/sprites/items/bronzeSword.png');
         this.load.image('bronzeHelm', 'assets/sprites/items/bronzeHelm.png');
         this.load.image('bronzeLegs', 'assets/sprites/items/bronzeLegs.png');
         this.load.image('defaultShield', 'assets/sprites/items/defaultShield.png');
@@ -44,9 +46,8 @@ export class InvScene extends Phaser.Scene {
         this.load.image('cape', 'assets/sprites/items/cape.png');
         this.load.image('ring', 'assets/sprites/items/ring.png');
         this.load.image('necklace', 'assets/sprites/items/necklace.png');
-        this.load.image('coins', 'assets/sprites/items/coins.png');
+        this.load.image('coins', 'assets/sprites/items/coins.png');*/
 
-        this.load.bitmapFont('prstart', 'assets/fonts/test/font.png', 'assets/fonts/test/font.fnt');
 
     }
 
@@ -346,6 +347,8 @@ export class InvScene extends Phaser.Scene {
             });
 
         this.startInventory();
+
+        sceneLoaded();
     }
 
     resizeInventory() {

@@ -1,6 +1,8 @@
 import 'phaser';
 import { isChatting, toggleChat } from './ChatHandler';
 import { getItemList } from './ItemHandler';
+import { sceneLoaded } from '../index';
+
 
 let coreStats = [
     ['Strength', 10, 0],
@@ -220,6 +222,8 @@ export class EquipScene extends Phaser.Scene {
 
         this.startEquipment();
         this.onResize();
+
+        sceneLoaded();
     }
 
     update() {
@@ -227,7 +231,7 @@ export class EquipScene extends Phaser.Scene {
         this.equipWidth = this.cameras.main.displayWidth * this.equipWidthPercent;
         this.equipHeight = this.cameras.main.displayHeight;
 
-        if(this.equipBack.displayWidth != this.equipWidth || this.equipHeight != this.cameras.main.displayHeight) {
+        if(this.equipBack.displayWidth != this.equipWidth || this.equipBack.displayHeight != this.cameras.main.displayHeight) {
             this.onResize();
         }
 
@@ -286,8 +290,8 @@ export class EquipScene extends Phaser.Scene {
         this.equipWidth = this.cameras.main.displayWidth * this.equipWidthPercent;
         this.equipHeight = this.cameras.main.displayHeight;
 
-        this.statBoxWidth = this.cameras.main.width * 0.225;
-        this.statBoxHeight = this.cameras.main.height * 0.45;
+        this.statBoxWidth = this.cameras.main.displayWidth * 0.225;
+        this.statBoxHeight = this.cameras.main.displayHeight * 0.45;
         this.statBoxStartX = this.equipWidth + 20;
         this.statBoxStartY = this.eqText.x;
 
@@ -337,8 +341,11 @@ export class EquipScene extends Phaser.Scene {
 
             this.eqSlotIcons[i].x = this.eqSlots[i].x;
             this.eqSlotIcons[i].y = this.eqSlots[i].y;
-            this.eqSlotIcons[i].displayWidth = this.eqSlots[i].displayWidth;
-            this.eqSlotIcons[i].displayHeight = this.eqSlots[i].displayHeight;
+            //this.eqSlotIcons[i].displayWidth = this.eqSlots[i].displayWidth;
+            //this.eqSlotIcons[i].displayHeight = this.eqSlots[i].displayHeight;
+
+            this.eqSlotIcons[i].displayWidth = 32;
+            this.eqSlotIcons[i].displayHeight = 32;
 
         }
 

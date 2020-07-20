@@ -18,7 +18,10 @@ export default {
             if(player.target >= 0) {
                 let enemy = EH.enemyById(player.target);
 
-                if(!enemy) player.target = -1;
+                if(!enemy){
+                    player.target = -1;
+                    console.log('no enemy uhh')
+                }
 
                 //player.sprite.anims.play('attack', true);
             }
@@ -40,17 +43,20 @@ export default {
 
         p.sprite.anims.play('attack');
 
-        //bloodEffect(e.sprite.x, e.sprite.y);
 
         let phaser = window.game;
         let scene = phaser.scene.getScene('Game');
 
         scene.sword2.play();
 
-        if(p.sprite.body.x > e.sprite.body.x) {
+        p.target = data.eid;
+
+        if(p.sprite.x > e.sprite.x) {
             p.sprite.setScale(-p.scale, p.scale);
+            p.sprite.setOrigin(0.5);
         } else {
             p.sprite.setScale(p.scale, p.scale);
+            p.sprite.setOrigin(0.5);
         }
     },
     
@@ -70,11 +76,69 @@ export default {
         newMessage(data);
     },
 
+    playerCharge(data) {
+        let phaser = window.game;
+        let scene = phaser.scene.getScene('Game');
+
+        let p = this.playerByPid(data.pid);
+        if(!p) return;
+        let e = EH.enemyById(data.eid);
+        if(!e) return;
+
+        let newX;
+        p.target = data.eid;
+        if(p.sprite.x > e.sprite.x) {
+            newX = e.sprite.x + 32;
+            p.sprite.setScale(-p.scale, p.scale);
+        } else {
+            newX = e.sprite.x - 32;
+            p.sprite.setScale(p.scale, p.scale);
+        }
+
+
+        scene.tweens.add({
+            targets: p.sprite,
+            x: newX,
+            y: e.sprite.y,
+            duration: 300,
+            ease: 'Sine.easeIn',
+            repeat: 0,
+            yoyo: false,
+            onComplete: () => { this.stopMovement(data.pid); }
+        });
+
+        //p.localMoveX = e.sprite.body.x;
+        //p.localMoveY = e.sprite.body.y;
+
+        //this.stopMovement(data.pid);
+
+
+    },
+
+    stopMovement(pid) {
+        let p = this.playerByPid(pid);
+        if(!p) return;
+
+        p.movingX = p.sprite.body.x;
+        p.movingY = p.sprite.body.y;
+
+        p.destX = p.sprite.body.x;
+        p.destY = p.sprite.body.y;
+
+
+        p.localMoveX = p.sprite.body.x;
+        p.localMoveY = p.sprite.body.y;
+
+        //console.log()
+
+        
+    },
+
     newChat(data) {
         let player = this.playerByPid(data.id);
         if(!player) return;
 
-        let maxLength = 13;
+        let maxLength = 25;
         let maxLines = 4;
 
         let thisChat = data.name + ': ' + data.msg;
@@ -91,6 +155,8 @@ export default {
         //}
         
         player.lastChatText = newMsg;
+        player.chatText.x = player.sprite.x;
+        player.chatText.y = player.sprite.y - 40;
 
         player.lastChatTime = Date.now();
 
@@ -123,13 +189,13 @@ export default {
 
     removePlayer(p) {
         let thisPlayer = this.playerByPid(p.pid);
-        console.log(p)
+        console.log('remove p',p)
         if(thisPlayer) {
             for(let i=0;i<players.length;i++) {
                 if(players[i].pid == p.pid) {
                     players[i].sprite.destroy();
                     players.splice(i, 1);
-                    console.log(players)
+                    console.log('players',players)
                 }
             }
         }
@@ -148,8 +214,12 @@ export default {
             return;
         thisPlayer.movingX = data.x;
         thisPlayer.movingY = data.y;
+        thisPlayer.localMoveX = data.x;
+        thisPlayer.localMoveY = data.y;
+        thisPlayer.moving = true;
 
-        thisPlayer.target = -1;
+        //thisPlayer.target = -1;
+        //console.log('player move remove targ')
 
         //let phaser = window.game;
         //let scene = phaser.scene.GetScene('Game');

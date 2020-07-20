@@ -4,15 +4,15 @@ import { pickupItem } from './Socket';
 let itemList = [ // Name, sprite name
     ['Health potion', 'healthPotion'],
     ['Coins', 'coins'],
-    ['Copper helmet', 'bronzeHelm'],
-    ['Copper platelegs', 'bronzeLegs'],
-    ['Shield', 'defaultShield'],
-    ['Platebody', 'defaultBody'],
-    ['Boots', 'defaultBoots'],
-    ['Ruby ring', 'rubyRing'],
-    ['Copper dagger', 'copperDagger'],
+    ['Copper helmet', 'copperHelm'],
+    ['Copper platelegs', 'copperLegs'],
+    ['Copper shield', 'copperShield'],
+    ['Copper platebody', 'copperBody'],
+    ['Leather boots', 'leatherBoots'],
+    ['Silver ring', 'silverRing'],
+    ['Copper dagger', 'copperSword'],
     ['Leather gloves', 'leatherGloves'],
-    ['Bonetooth necklace', 'toothNecklace']
+    ['Copper amulet', 'copperAmulet']
     ];
 
 let groundItems = [];
@@ -75,7 +75,7 @@ export default {
         let scene = phaser.scene.getScene('Game');
         let itemSprite = scene.physics.add.sprite(data.x, data.y, itemList[data.type][1]).setInteractive();
 
-        itemSprite.setScale(0.6, 0.6);
+        itemSprite.setScale(1.2, 1.2);
         itemSprite.depth = 3;
 
         itemSprite.on('pointerdown', () => {

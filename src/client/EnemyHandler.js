@@ -69,6 +69,7 @@ export default {
             if(enemies[i].id == eid) {
                 enemies[i].destroyTimer = 25;
                 enemies[i].sprite.anims.play(enemies[i].spriteName + '_death', false);
+                console.log(enemies[i].sprite.anims);
             }
         }
     },
@@ -80,9 +81,11 @@ export default {
         if(!p) return;
 
         if (e.sprite.body.x > p.sprite.body.x) {
-            e.sprite.setScale(-e.scale, e.scale);
+            //e.sprite.setScale(-e.scaleX, e.scaleY);
+            e.sprite.flipX = true;
         } else {
-            e.sprite.setScale(e.scale, e.scale);
+            //e.sprite.setScale(e.scaleX, e.scaleY);
+            e.sprite.flipX = false;
         }
 
         let phaser = window.game;
@@ -90,7 +93,7 @@ export default {
 
         scene.sword1.play();
         
-        scene.cameras.main.shake(200, 0.005);
+        //scene.cameras.main.shake(200, 0.005);
 
 
         e.target = data.pid;
@@ -123,15 +126,20 @@ export default {
 
         scene.tweens.add({
             targets: damageText,
+            x: enemy.sprite.x,
             y: enemy.sprite.y - 50,
-            duration: 2000,
+            duration: 1000,
             ease: 'Sine.easeInOut',
             repeat: 0,
             yoyo: false,
             onComplete: damageText.destroy.bind(damageText, false)
         });
 
-        player.target = eid;
+        //player.target = eid;
+        if(enemy.target == -1) {
+            enemy.target = player.pid;
+
+        }
 
         enemy.HP -= damage;
 
